@@ -69,7 +69,9 @@ export default function Home() {
                          <img 
                            src={c.img} 
                            alt={c.title} 
-                           className="h-80 w-full object-cover transition duration-500 group-hover:scale-110"
+                           className={`h-80 w-full object-cover transition duration-500 group-hover:scale-110 ${
+                             c.categoryClass === "makeup" ? "object-top" : ""
+                           }`}
                            onError={(e) => {
                              console.log('Image failed to load:', c.img);
                              e.currentTarget.src = 'https://picsum.photos/800/600?random=99';
@@ -126,9 +128,9 @@ export default function Home() {
                        <img
                         src={
                           i === 0 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/WhatsAppImage3.jpeg" : // Pre-wedding photoshoot
-                          i === 1 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/WhatsAppImage1.jpeg" : // Bridal makeup
-                          i === 2 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_MEHENDI&HALDI1164.jpg" : // Mehndi & jewelry
-                          IMAGES.blogEvents // Sangeet night
+                          i === 1 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/900ebac2-9bbe-499c-a565-6debc8f4864a.jpeg" : // Bridal makeup
+                          i === 2 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/99ce097a-a135-4bc8-8d83-60aae1ce63d3.jpeg" : // Mehndi & jewelry
+                          "https://bridesideimages.blob.core.windows.net/tbs-website-images/fd04e187-92b3-4c80-9c8e-b7df8877ae3d.jpeg" // Sangeet night
                         }
                          className={`h-full w-full object-cover ${
                            i === 0 ? 'object-[60%_center]' : 

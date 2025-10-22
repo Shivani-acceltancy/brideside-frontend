@@ -37,16 +37,16 @@ export const IMAGES: Record<ImageKey, string> = {
   photographyCategory: "https://bridesideimages.blob.core.windows.net/tbs-website-images/Notusmanifestingapastelleheng.jpg",
 
   // Makeup category image
-  makeupCategory: "https://bridesideimages.blob.core.windows.net/tbs-website-images/IMG_4112(1).HEIC",
+  makeupCategory: "https://bridesideimages.blob.core.windows.net/tbs-website-images/0a86bc73-db27-41bf-80ed-70ea568a68ab.jpeg",
 
   // Planning & Decor category image
   planningCategory: "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_WEDDING-5749.jpg",
 
   // Blog images
   blogPhotography: "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_WEDDING-5591.jpg",
-  blogMakeup: "https://bridesideimages.blob.core.windows.net/tbs-website-images/Notusmanifestingapastellehenga7.jpg",
-  blogTraditions: "https://bridesideimages.blob.core.windows.net/tbs-website-images/Notusmanifestingapastellehenga5.jpg",
-  blogEvents: "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_WEDDING-5591.jpg",
+  blogMakeup: "https://bridesideimages.blob.core.windows.net/tbs-website-images/900ebac2-9bbe-499c-a565-6debc8f4864a.jpeg",
+  blogTraditions: "https://bridesideimages.blob.core.windows.net/tbs-website-images/99ce097a-a135-4bc8-8d83-60aae1ce63d3.jpeg",
+  blogEvents: "https://bridesideimages.blob.core.windows.net/tbs-website-images/fd04e187-92b3-4c80-9c8e-b7df8877ae3d.jpeg",
 
   // Planning form background image
   planningFormBackground: "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_WEDDING-5714.jpg",
