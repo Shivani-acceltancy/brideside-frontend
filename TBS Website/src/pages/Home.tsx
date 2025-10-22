@@ -1,71 +1,117 @@
 import HeroSection from "../components/HeroSection";
+import SimpleScrollArrow from "../components/SimpleScrollArrow";
+import LuxuryHeading from "../components/LuxuryHeading";
+import AnimatedTextReveal from "../components/AnimatedTextReveal";
+import AnimatedCategoryHeading from "../components/AnimatedCategoryHeading";
 import { Link } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
+import { IMAGES } from "../assets/images";
+import "../styles/glassmorphism.css";
 
 export default function Home() {
+  const categories = [
+    {
+      title: "Photography",
+      img: IMAGES.photographyCategory,
+      align: "left",
+      to: "/photos",
+      desc: "Capture your special moments with stunning styles and poses",
+      categoryClass: "photography"
+    },
+    {
+      title: "Makeup",
+      img: IMAGES.makeupCategory,
+      align: "right",
+      to: "/photos",
+      desc: "Discover beautiful bridal makeup looks for every occasion",
+      categoryClass: "makeup"
+    },
+    {
+      title: "Planning & Decor",
+      img: "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_MEHENDI&HALDI1164.jpg",
+      align: "left",
+      to: "/photos",
+      desc: "Explore creative decor ideas and planning inspiration",
+      categoryClass: "planning"
+    },
+  ];
+  
   return (
     <>
       <HeroSection />
+      <SimpleScrollArrow targetId="wedding-journey" />
 
       <HowItWorks />
 
-      <section className="bg-[#C6A9D6]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+             <section id="wedding-categories" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20" style={{ backgroundColor: '#F9EAFB' }}>
           <div className="mx-auto max-w-4xl text-center">
-            <AnimatedHeading>Wedding Categories</AnimatedHeading>
+            <LuxuryHeading 
+              className="text-4xl md:text-6xl font-black tracking-tight"
+              style={{
+                fontFamily: "'Playfair Display', 'Times New Roman', serif",
+                color: '#4a0000',
+              }}
+            >
+              Wedding Categories
+            </LuxuryHeading>
             <p className="mt-4 text-lg md:text-xl text-gray-600">Browse through curated collections of wedding inspiration</p>
           </div>
 
-          <div className="mt-10 grid gap-8">
-            {[
-              {
-                title: "Photography",
-                img: "/images/hero-5591.jpg",
-                align: "left",
-                to: "/photos",
-                desc: "Capture your special moments with stunning styles and poses",
-              },
-              {
-                title: "Makeup",
-                img: "/images/hero-5597.jpg",
-                align: "right",
-                to: "/photos",
-                desc: "Discover beautiful bridal makeup looks for every occasion",
-              },
-              {
-                title: "Planning & Decor",
-                img: "/images/hero-5714.jpg",
-                align: "left",
-                to: "/photos",
-                desc: "Explore creative decor ideas and planning inspiration",
-              },
-            ].map((c, i) => (
-              <Link
-                key={i}
-                to={c.to}
-                className={
-                  "group grid items-center gap-6 rounded-xl border bg-[#C6A9D6] p-4 shadow-sm transition-transform duration-300 ease-out will-change-transform hover:shadow-xl hover:scale-[1.02] md:grid-cols-2 " +
-                  (c.align === "right" ? "md:[&>*:first-child]:order-2" : "")
-                }
-              >
-                <div className="relative overflow-hidden rounded-lg">
-                  <img src={c.img} alt={c.title} className="h-64 w-full object-cover transition duration-300 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/10 to-purple-600/10" />
+               <div className="mt-14 grid gap-8">
+                 {categories.map((c, i) => (
+                   <div key={i} className="rounded-2xl border p-6 shadow-sm ring-1 ring-black/5 transition-all duration-700 ease-out will-change-transform hover:shadow-xl hover:scale-[1.02]" style={{ backgroundColor: '#F4D9EA' }}>
+              <div
+                       className={`group grid items-center gap-8 md:grid-cols-2 ${
+                         c.align === "right" ? "md:[&>*:first-child]:order-2" : ""
+                       }`}
+                     >
+                       <div className="relative overflow-hidden rounded-2xl">
+                         <img 
+                           src={c.img} 
+                           alt={c.title} 
+                           className="h-80 w-full object-cover transition duration-500 group-hover:scale-110"
+                           onError={(e) => {
+                             console.log('Image failed to load:', c.img);
+                             e.currentTarget.src = 'https://picsum.photos/800/600?random=99';
+                           }}
+                           onLoad={() => console.log('Image loaded successfully:', c.img)}
+                         />
+                         <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                       </div>
+                       <div className="space-y-4">
+                        <AnimatedCategoryHeading 
+                          className={`text-3xl md:text-4xl font-bold category-heading ${c.categoryClass} animated-underline`}
+                        >
+                          {c.title}
+                        </AnimatedCategoryHeading>
+                         <p className="text-gray-600 text-lg leading-relaxed">{c.desc}</p>
+                         <div className="pt-4">
+                           <span className="inline-flex items-center text-pink-600 font-semibold group-hover:text-pink-700 transition-colors duration-300">
+                             View Gallery 
+                             <svg className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                             </svg>
+                           </span>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-[#A992AC]">{c.title}</h3>
-                  <p className="mt-2 text-gray-600">{c.desc}</p>
-                  <span className="mt-4 inline-block text-pink-600">View Gallery →</span>
                 </div>
-              </Link>
+              </div>
+                   </div>
             ))}
-          </div>
         </div>
+        <SimpleScrollArrow targetId="latest-blog" />
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 bg-[#C6A9D6]">
+             <section id="latest-blog" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16" style={{ backgroundColor: '#F9EAFB' }}>
         <div className="mx-auto max-w-4xl text-center">
-          <AnimatedHeading>Latest Blog</AnimatedHeading>
+          <LuxuryHeading 
+            className="text-4xl md:text-6xl font-black tracking-tight"
+            style={{
+              fontFamily: "'Playfair Display', 'Times New Roman', serif",
+              color: '#4a0000',
+            }}
+          >
+            Latest Blog
+          </LuxuryHeading>
           <p className="mt-4 text-lg md:text-xl text-gray-600">Expert tips, inspiration, and guides for your perfect wedding</p>
         </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -75,34 +121,63 @@ export default function Home() {
             { title: "Mehndi & Jewelry: Wedding Essentials", badge: "Traditions" },
             { title: "Sangeet Night: Planning the Perfect Celebration", badge: "Events" },
           ].map((b, i) => (
-            <Link key={i} to="/blog" className="group overflow-hidden rounded-xl border bg-[#C6A9D6] shadow-sm transition-transform duration-300 ease-out will-change-transform hover:shadow-xl hover:scale-[1.02]">
-              <div className="relative h-40 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1587271613732-77336cd06c27?q=80&w=1200&auto=format&fit=crop"
-                  className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                   <Link key={i} to="/blog" className="blog-card group overflow-hidden rounded-xl will-change-transform">
+                     <div className="blog-image relative h-40 overflow-hidden">
+                       <img
+                        src={
+                          i === 0 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/WhatsAppImage3.jpeg" : // Pre-wedding photoshoot
+                          i === 1 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/WhatsAppImage1.jpeg" : // Bridal makeup
+                          i === 2 ? "https://bridesideimages.blob.core.windows.net/tbs-website-images/SHREY&MAHIMA_MEHENDI&HALDI1164.jpg" : // Mehndi & jewelry
+                          IMAGES.blogEvents // Sangeet night
+                        }
+                         className={`h-full w-full object-cover ${
+                           i === 0 ? 'object-[60%_center]' : 
+                           i === 1 ? 'object-top' : ''
+                         }`}
                   alt="Blog"
+                         onError={(e) => {
+                           console.log('Blog image failed to load');
+                           e.currentTarget.src = 'https://picsum.photos/800/600?random=99';
+                         }}
+                         onLoad={() => console.log('Blog image loaded successfully')}
                 />
-                <span className="absolute left-3 top-3 rounded bg-white/90 px-2 py-1 text-xs font-medium text-pink-700 border border-pink-200">
+                       <span className="blog-badge absolute left-3 top-3 rounded-lg bg-yellow-100/90 px-3 py-1 text-xs font-medium text-amber-700 border border-amber-200">
                   {b.badge}
                 </span>
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-900">{b.title}</h3>
-                <p className="mt-2 text-sm text-gray-600">Read more →</p>
+                     <div className="blog-card-content p-6">
+                       <h3 className="blog-title font-semibold text-gray-900 text-sm leading-tight">{b.title}</h3>
+                       <p className="blog-description mt-3 text-sm text-gray-600">Read more</p>
+                       <div className="blog-link mt-2 text-sm text-amber-600 font-medium">
+                         <span>Explore</span>
+                         <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                         </svg>
+                       </div>
               </div>
             </Link>
           ))}
         </div>
+        <SimpleScrollArrow targetId="wedding-journey" className="mt-8" />
       </section>
     </>
   );
 }
 
+
 function HowItWorks() {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 bg-[#C6A9D6]">
+    <section id="wedding-journey" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-1 pb-4" style={{ backgroundColor: '#F9EAFB' }}>
       <div className="mx-auto max-w-4xl text-center">
-        <AnimatedHeading>Your Wedding Journey</AnimatedHeading>
+        <LuxuryHeading 
+          className="text-4xl md:text-6xl font-black tracking-tight"
+          style={{
+            fontFamily: "'Playfair Display', 'Times New Roman', serif",
+            color: '#4a0000',
+          }}
+        >
+          Your Wedding Journey
+        </LuxuryHeading>
         <p className="mt-4 text-lg md:text-xl text-gray-600">From the first consultation to your special day, we'll be with you every step of the way</p>
       </div>
 
@@ -110,7 +185,7 @@ function HowItWorks() {
       <div className="relative mx-auto mt-14 grid grid-cols-1 lg:grid-cols-[1fr_80px_1fr] gap-10">
         {/* Vertical line spanning entire timeline */}
         <div className="pointer-events-none absolute left-1/2 top-0 bottom-0 hidden lg:block -translate-x-1/2 z-0">
-          <div className="h-full w-1 bg-gradient-to-b from-[#A992AC] via-[#A992AC] to-[#A992AC]" />
+          <div className="h-full w-1 bg-gradient-to-b from-purple-400 via-pink-400 to-indigo-400" />
         </div>
 
         {/* Step 1 - left */}
@@ -140,6 +215,7 @@ function HowItWorks() {
         </div>
         <div className="lg:col-start-3" />
       </div>
+      <SimpleScrollArrow targetId="wedding-categories" />
     </section>
   );
 }
@@ -168,15 +244,16 @@ function AnimatedHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2
       ref={ref}
-      className={`text-4xl md:text-6xl font-extrabold tracking-tight text-[#A992AC] transform transition-all duration-1000 ease-out ${
+      className={`text-4xl md:text-6xl font-extrabold tracking-tight transform transition-all duration-1000 ease-out ${
         isVisible 
           ? 'translate-y-0 opacity-100 scale-100' 
           : 'translate-y-8 opacity-0 scale-95'
       }`}
       style={{
         fontFamily: "'Playfair Display', 'Times New Roman', serif",
-        textShadow: isVisible ? '0 0 20px rgba(169, 146, 172, 0.3)' : 'none',
-        filter: isVisible ? 'drop-shadow(0 4px 8px rgba(169, 146, 172, 0.2))' : 'none'
+        color: '#4a0000',
+        textShadow: isVisible ? '0 0 20px rgba(74, 0, 0, 0.4)' : 'none',
+        filter: isVisible ? 'drop-shadow(0 4px 8px rgba(74, 0, 0, 0.3))' : 'none'
       }}
     >
       {children}
@@ -208,21 +285,23 @@ function StepCard({ _number, title, text }: { _number?: number; title: string; t
   return (
     <div 
       ref={ref}
-      className={`rounded-2xl border bg-[#C6A9D6] p-6 shadow-sm ring-1 ring-black/5 transition-all duration-700 ease-out will-change-transform hover:shadow-xl hover:scale-[1.02] ${
+      className={`rounded-2xl border p-6 shadow-sm ring-1 ring-black/5 transition-all duration-700 ease-out will-change-transform hover:shadow-xl hover:scale-[1.02] ${
         isVisible 
           ? 'translate-y-0 opacity-100' 
           : 'translate-y-12 opacity-0'
       }`}
+      style={{ backgroundColor: '#F4D9EA' }}
     >
-      <h3 
-        className="text-4xl md:text-5xl font-extrabold leading-tight text-[#A992AC] transform transition-all duration-800 ease-out"
+      <AnimatedTextReveal 
+        text={title}
+        className="text-4xl md:text-5xl font-extrabold leading-tight"
         style={{
           fontFamily: "'Playfair Display', 'Times New Roman', serif",
-          textShadow: isVisible ? '0 0 15px rgba(169, 146, 172, 0.2)' : 'none'
+          color: '#4a0000',
         }}
-      >
-        {title}
-      </h3>
+        delay={isVisible ? 200 : 0}
+        duration={80}
+      />
       <p className="mt-3 max-w-xl text-gray-600">{text}</p>
     </div>
   );
@@ -231,7 +310,7 @@ function StepCard({ _number, title, text }: { _number?: number; title: string; t
 function Badge({ n }: { n: number }) {
   return (
     <div className="relative z-10">
-      <div className="h-12 w-12 -translate-x-px rounded-full border-4 border-[#A992AC] bg-[#A992AC] text-[#C6A9D6] grid place-items-center font-bold shadow-md">{n}</div>
+      <div className="h-12 w-12 -translate-x-px rounded-full border-4 border-amber-500 bg-gradient-to-br from-amber-400 to-yellow-500 text-amber-900 grid place-items-center font-bold shadow-md">{n}</div>
     </div>
   );
 }

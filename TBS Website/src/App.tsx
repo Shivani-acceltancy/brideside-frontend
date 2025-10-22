@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { AppRoutes } from "./routes";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import TBSBotModal from "./components/TBSBotModal";
 
 export default function App() {
   return (
@@ -14,7 +13,6 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-      <TBSBotModal />
     </div>
   );
 }
